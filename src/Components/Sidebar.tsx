@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const styles = {
   body: css`
-    width: 25%;
+    width: 30%;
     margin: 20px;
     margin-top: 30px;
   `,
