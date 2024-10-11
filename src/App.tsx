@@ -1,9 +1,9 @@
-import Dashboard from "./Components/Dashboard";
+import Topics from "./Components/Topics";
 
 function App() {
   return (
     <div>
-      <Dashboard />
+      <Topics />
     </div>
   );
 }

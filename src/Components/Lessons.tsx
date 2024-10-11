@@ -6,11 +6,11 @@ const styles = {
   body: css`
     height: 100%;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     font-family: math;
   `,
 };
-const Dashboard = () => {
+const Topics = () => {
   return (
     <div css={styles.body}>
       <ItemList />
@@ -18,4 +18,4 @@ const Dashboard = () => {
     </div>
   );
 };
-export default Dashboard;
+export default Topics;
