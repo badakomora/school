@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { listTypes } from "../types";
+import { Classroom } from "./Classroom";
 
 const styles = {
   list: css`
@@ -10,7 +11,7 @@ const styles = {
       color: #000;
       display: flex;
       flex-direction: column;
-      padding: 15px;
+      padding: 10px;
       box-shadow: 0px 2px 10px lavender;
       margin-bottom: 10px;
       background-color: #fff;
@@ -41,12 +42,12 @@ const styles = {
 
       span:first-of-type {
         font-weight: bold;
-        font-size: 20px;
+        font-size: 17px;
         z-index: 2;
       }
 
       span:last-of-type {
-        font-size: 15px;
+        font-size: 13px;
         z-index: 2;
       }
     }
@@ -56,27 +57,32 @@ const styles = {
 const ItemList: React.FC<listTypes> = () => {
   const [lessons, setLessons] = useState<listTypes[]>([]);
   const [topics, setTopics] = useState<listTypes[]>([]);
+  const [component, setComponent] = useState("");
 
   useEffect(() => {
     const fetchedtopics = [
       {
-        title: "A Journey through Greek Myths, Reading.",
+        title: "Historia ya Kiswahili.",
         desc: "5 lessons",
       },
       {
-        title: "A Journey through Greek Myths, Reading.",
+        title: "Sarufi ya Kiswahili.",
         desc: "5 lessons",
       },
       {
-        title: "A Journey through Greek Myths, Reading.",
+        title: "Fasihi ya Kiswahili.",
         desc: "5 lessons",
       },
       {
-        title: "A Journey through Greek Myths, Reading.",
+        title: "Utamaduni wa Waswahili.",
         desc: "5 lessons",
       },
       {
-        title: "A Journey through Greek Myths, Reading.",
+        title: "Mbinu za Mawasiliano.",
+        desc: "5 lessons",
+      },
+      {
+        title: "Mbinu za Mawasiliano.",
         desc: "5 lessons",
       },
     ];
@@ -85,7 +91,11 @@ const ItemList: React.FC<listTypes> = () => {
 
   const fetchedLessons = [
     {
-      title: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+      title: "Asili ya lugha ya Kiswahili.",
+      desc: "video, worksheet",
+    },
+    {
+      title: "Maeneo yanayozungumza Kiswahili.",
       desc: "video, worksheet",
     },
   ];
@@ -95,28 +105,45 @@ const ItemList: React.FC<listTypes> = () => {
     setTopics([]);
   };
 
+  const handleClass = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setComponent("classroom");
+    setLessons([]);
+    setTopics([]);
+  };
+
   return (
     <>
       <div css={styles.list}>
-        <h1>
-          {topics.length > 0
-            ? "Year 1 Topics"
-            : lessons.length > 0
-            ? "Topic 1"
-            : ""}
-        </h1>
-        {topics.map((topic, index) => (
-          <a href="." key={index} onClick={handleLessons}>
-            <span>{topic.title}</span>
-            <span>{topic.desc}</span>
-          </a>
-        ))}
-        {lessons.map((lesson, index) => (
-          <a href="." key={index}>
-            <span>{lesson.title}</span>
-            <span>{lesson.desc}</span>
-          </a>
-        ))}
+        {component === "classroom" ? (
+          <Classroom />
+        ) : (
+          <>
+            <h1>
+              {topics.length > 0
+                ? "Year 1 Topics"
+                : lessons.length > 0
+                ? "Topic 1"
+                : ""}
+            </h1>
+            {topics.map((topic, index) => (
+              <a href="." key={index} onClick={handleLessons}>
+                <span>
+                  {index + 1}. {topic.title}
+                </span>
+                <span>{topic.desc}</span>
+              </a>
+            ))}
+            {lessons.map((lesson, index) => (
+              <a href="." key={index} onClick={handleClass}>
+                <span>
+                  {index + 1}. {lesson.title}
+                </span>
+                <span>{lesson.desc}</span>
+              </a>
+            ))}
+          </>
+        )}
       </div>
     </>
   );

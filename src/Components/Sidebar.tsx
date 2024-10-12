@@ -5,9 +5,8 @@ import User from "./User";
 const styles = {
   container: css`
     width: 100%;
-    margin: 20px;
     display: block;
-    margin-top: 35px;
+    margin-top: 50px;
     div {
       div {
         margin: 0;
