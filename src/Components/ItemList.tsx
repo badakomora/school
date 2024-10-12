@@ -1,138 +1,125 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-const styles = {
-  example: css`
-    width: 55%;
-    margin: 20px;
-  `,
-  list: css`
-    margin: 0;
-    padding: 0;
-    list-style: none;
+import React, { useEffect, useState } from "react";
+import { listTypes } from "../types";
 
+const styles = {
+  list: css`
     a {
       text-decoration: none;
       color: #000;
-      li {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        box-shadow: 0px 2px 10px lavender;
-        margin-bottom: 10px;
-        background-color: #fff;
-        border-left: 4px solid #1061b7;
-        position: relative;
-        cursor: pointer;
-        border-radius: 4px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-
-        &:hover {
-          color: #fff;
-          background-color: inherit;
-
-          &:after {
-            width: 100%;
-          }
-        }
-
-        .title {
-          font-weight: bold;
-          font-size: 18px;
-          position: relative;
-          z-index: 2;
-          line-height: 24px;
-        }
-
-        .subtitle {
-          font-size: 14px;
-          opacity: 0.7;
-          position: relative;
-          z-index: 2;
-        }
-
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      box-shadow: 0px 2px 10px lavender;
+      margin-bottom: 10px;
+      background-color: #fff;
+      border-left: 4px solid #1061b7;
+      position: relative;
+      cursor: pointer;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      &:after {
+        background: linear-gradient(90deg, #fff 0%, #1f56c6 30%);
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        transition: width 0.5s ease;
+        z-index: 1;
+      }
+      &:hover {
+        color: #fff;
+        background-color: inherit;
         &:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0%;
-          height: 100%;
-          transition: width 0.5s ease;
-          z-index: 1;
+          width: 100%;
         }
       }
-    }
-  `,
-  listing: css`
-    &:after {
-      background: linear-gradient(50deg, #fff 0%, #1f56c6 20%);
-    }
-  `,
-  pagination: css`
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    span {
-      background: linear-gradient(50deg, #fff 0%, #1f56c6 20%);
-      padding: 5px;
-      border-radius: 5px;
-      color: white;
-      margin: 5px;
-      a {
-        color: #fff;
-        text-decoration: none;
+
+      span:first-of-type {
+        font-weight: bold;
+        font-size: 20px;
+        z-index: 2;
+      }
+
+      span:last-of-type {
+        font-size: 15px;
+        z-index: 2;
       }
     }
   `,
 };
-const ItemList = () => {
-  const topics = [
+
+const ItemList: React.FC<listTypes> = () => {
+  const [lessons, setLessons] = useState<listTypes[]>([]);
+  const [topics, setTopics] = useState<listTypes[]>([]);
+
+  useEffect(() => {
+    const fetchedtopics = [
+      {
+        title: "A Journey through Greek Myths, Reading.",
+        desc: "5 lessons",
+      },
+      {
+        title: "A Journey through Greek Myths, Reading.",
+        desc: "5 lessons",
+      },
+      {
+        title: "A Journey through Greek Myths, Reading.",
+        desc: "5 lessons",
+      },
+      {
+        title: "A Journey through Greek Myths, Reading.",
+        desc: "5 lessons",
+      },
+      {
+        title: "A Journey through Greek Myths, Reading.",
+        desc: "5 lessons",
+      },
+    ];
+    setTopics(fetchedtopics);
+  }, []);
+
+  const fetchedLessons = [
     {
-      title: "A Journey through Greek Myths: Reading.",
-      desc: "5 lessons",
-    },
-    {
-      title: "A Journey through Greek Myths: Reading.",
-      desc: "5 lessons",
-    },
-    {
-      title: "A Journey through Greek Myths: Reading.",
-      desc: "5 lessons",
-    },
-    {
-      title: "A Journey through Greek Myths: Reading.",
-      desc: "5 lessons",
-    },
-    {
-      title: "A Journey through Greek Myths: Reading.",
-      desc: "5 lessons",
+      title: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+      desc: "video, worksheet",
     },
   ];
+  const handleLessons = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLessons(fetchedLessons);
+    setTopics([]);
+  };
+
   return (
-    <div id="example" css={styles.example}>
-      <div>
-        <h1>Year 1 Topics</h1>
-      </div>
-      <ul className="list" css={styles.list}>
+    <>
+      <div css={styles.list}>
+        <h1>
+          {topics.length > 0
+            ? "Year 1 Topics"
+            : lessons.length > 0
+            ? "Topic 1"
+            : ""}
+        </h1>
         {topics.map((topic, index) => (
-          <a href="." key={index}>
-            <li className="listing" css={styles.listing}>
-              <span className="title">{topic.title}</span>
-              <span className="subtitle">{topic.desc}</span>
-            </li>
+          <a href="." key={index} onClick={handleLessons}>
+            <span>{topic.title}</span>
+            <span>{topic.desc}</span>
           </a>
         ))}
-      </ul>
-      <div css={styles.pagination}>
-        <span>
-          <a href=".">Prev</a>
-        </span>
-        <span>
-          <a href=".">Next</a>
-        </span>
+        {lessons.map((lesson, index) => (
+          <a href="." key={index}>
+            <span>{lesson.title}</span>
+            <span>{lesson.desc}</span>
+          </a>
+        ))}
       </div>
-    </div>
+    </>
   );
 };
+
 export default ItemList;
