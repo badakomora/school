@@ -87,52 +87,42 @@ const styles = {
   `,
 };
 const ItemList = () => {
+  const topics = [
+    {
+      title: "A Journey through Greek Myths: Reading.",
+      desc: "5 lessons",
+    },
+    {
+      title: "A Journey through Greek Myths: Reading.",
+      desc: "5 lessons",
+    },
+    {
+      title: "A Journey through Greek Myths: Reading.",
+      desc: "5 lessons",
+    },
+    {
+      title: "A Journey through Greek Myths: Reading.",
+      desc: "5 lessons",
+    },
+    {
+      title: "A Journey through Greek Myths: Reading.",
+      desc: "5 lessons",
+    },
+  ];
   return (
     <div id="example" css={styles.example}>
       <div>
         <h1>Year 1 Topics</h1>
       </div>
       <ul className="list" css={styles.list}>
-        <a href=".">
-          <li className="listing" css={styles.listing}>
-            <span className="title">
-              A Journey through Greek Myths: Reading.
-            </span>
-            <span className="subtitle">5 lessons</span>
-          </li>
-        </a>
-        <a href=".">
-          <li className="listing" css={styles.listing}>
-            <span className="title">
-              A Journey through Greek Myths: Reading.
-            </span>
-            <span className="subtitle">5 lessons</span>
-          </li>
-        </a>
-        <a href=".">
-          <li className="listing" css={styles.listing}>
-            <span className="title">
-              A Journey through Greek Myths: Reading.
-            </span>
-            <span className="subtitle">5 lessons</span>
-          </li>
-        </a>
-        <a href=".">
-          <li className="listing" css={styles.listing}>
-            <span className="title">
-              A Journey through Greek Myths: Reading.
-            </span>
-            <span className="subtitle">5 lessons</span>
-          </li>
-        </a>
-        <a href=".">
-          <li className="listing" css={styles.listing}>
-            <span className="title">
-              A Journey through Greek Myths: Reading.
-            </span>
-            <span className="subtitle">5 lessons</span>
-          </li>
-        </a>
+        {topics.map((topic, index) => (
+          <a href="." key={index}>
+            <li className="listing" css={styles.listing}>
+              <span className="title">{topic.title}</span>
+              <span className="subtitle">{topic.desc}</span>
+            </li>
+          </a>
+        ))}
       </ul>
       <div css={styles.pagination}>
         <span>
