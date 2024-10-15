@@ -92,7 +92,7 @@ const ItemList: React.FC<listTypes> = () => {
   const fetchedLessons = [
     {
       title: "Asili ya lugha ya Kiswahili.",
-      desc: "video, worksheet",
+      desc: "video, worksheet, Quiz, Slides",
     },
     {
       title: "Maeneo yanayozungumza Kiswahili.",
@@ -121,7 +121,7 @@ const ItemList: React.FC<listTypes> = () => {
           <>
             <h1>
               {topics.length > 0
-                ? "Year 1 Topics"
+                ? "Year 7 Topics"
                 : lessons.length > 0
                 ? "Topic 1"
                 : ""}
