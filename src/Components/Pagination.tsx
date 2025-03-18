@@ -22,10 +22,10 @@ const Pagination = () => {
   return (
     <div css={styles.pagination}>
       <span>
-        <a href=".">Prev</a>
+        <a href=".">Prev </a>
       </span>
       <span>
-        <a href=".">Next</a>
+        <a href=".">Next </a>
       </span>
     </div>
   );
