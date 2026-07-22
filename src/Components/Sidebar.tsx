@@ -44,8 +44,6 @@ const styles = {
       }
     }
 
-    /* ================= Mobile ================= */
-
     @media (max-width: 768px) {
       position: fixed;
       top: 64px;
@@ -82,6 +80,9 @@ type SidebarProps = {
   open: boolean;
 };
 
+// Dynamically generate Year 7 - Year 11
+const years = Array.from({ length: 5 }, (_, index) => `Year ${index + 7}`);
+
 const Sidebar = ({ open }: SidebarProps) => {
   return (
     <div css={styles.container(open)}>
@@ -89,25 +90,11 @@ const Sidebar = ({ open }: SidebarProps) => {
         <div>
           <h2>Academic Years</h2>
 
-          <span>
-            <a href=".">Year 7</a>
-          </span>
-
-          <span>
-            <a href=".">Year 8</a>
-          </span>
-
-          <span>
-            <a href=".">Year 9</a>
-          </span>
-
-          <span>
-            <a href=".">Year 10</a>
-          </span>
-
-          <span>
-            <a href=".">Year 11</a>
-          </span>
+          {years.map((year) => (
+            <span key={year}>
+              <a href=".">{year}</a>
+            </span>
+          ))}
         </div>
 
         <Quicklinks />
