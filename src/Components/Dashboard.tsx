@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import ItemList from "./ItemList";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
+import { Navbar } from "./Navbar";
+import ItemList from "./ItemList";
 import Pagination from "./Pagination";
 
 const styles = {
@@ -9,44 +11,42 @@ const styles = {
     width: 100%;
     display: flex;
     justify-content: center;
-    font-family: math;
 
     > div {
-      width: 1200px;
+      width: 90%;
       display: flex;
+      gap: 25px;
       align-items: flex-start;
-      gap: 30px;
-      margin: 20px auto;
 
       > div:first-of-type {
         flex: 1;
-        min-width: 0;
       }
 
       @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 0;
-
-        > div:first-of-type {
-          width: 100%;
-        }
+        display: block;
       }
     }
   `,
 };
 
 const Dashboard = () => {
-  return (
-    <div css={styles.dashboard}>
-      <div>
-        <div>
-          <ItemList title="" desc="" />
-          <Pagination />
-        </div>
+  const [open, setOpen] = useState(false);
 
-        <Sidebar />
+  return (
+    <>
+      <Navbar open={open} setOpen={setOpen} />
+
+      <div css={styles.dashboard}>
+        <div>
+          <div>
+            <ItemList title="" desc="" />
+            <Pagination />
+          </div>
+
+          <Sidebar open={open} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

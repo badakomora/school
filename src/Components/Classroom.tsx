@@ -9,7 +9,7 @@ const styles = {
 
     > div {
       max-width: 1000px;
-      margin: auto;
+      margin: 20px auto;
 
       > div {
         background: #fff;
@@ -196,8 +196,6 @@ export const Classroom = () => {
             muhimu zaidi barani Afrika.
           </p>
 
-          <hr />
-
           <p>🎥 Watch the Lesson Video</p>
 
           <video width="100%" height="360" controls>
@@ -207,8 +205,6 @@ export const Classroom = () => {
             />
             Your browser does not support the video tag.
           </video>
-
-          <hr />
 
           <p>📄 Presentation Material</p>
 
@@ -220,8 +216,6 @@ export const Classroom = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-
-          <hr />
 
           <p>Learning Activities</p>
 

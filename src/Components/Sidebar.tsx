@@ -4,17 +4,13 @@ import Quicklinks from "./Quicklinks";
 import User from "./User";
 
 const styles = {
-  container: css`
-    width: 500px;
+  container: (open: boolean) => css`
+    width: 40%;
     flex-shrink: 0;
 
     position: sticky;
     top: 20px;
     align-self: flex-start;
-
-    @media (max-width: 768px) {
-      display: none;
-    }
 
     > div {
       background: #fff;
@@ -43,21 +39,52 @@ const styles = {
             text-decoration: none;
             color: white;
             background: linear-gradient(135deg, #1f56c6, #3b82f6);
-            transition: 0.25s;
-
-            &:hover {
-              transform: translateY(-2px);
-            }
           }
         }
+      }
+    }
+
+    /* ================= Mobile ================= */
+
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 64px;
+      left: 0;
+
+      width: 300px;
+      height: calc(100vh - 64px);
+
+      margin: 0;
+      padding: 0;
+
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      background: #fff;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+
+      z-index: 9999;
+
+      transform: ${open ? "translateX(0)" : "translateX(-100%)"};
+      transition: transform 0.3s ease;
+
+      > div {
+        min-height: 100%;
+        border-radius: 0;
+        padding: 20px;
+        box-sizing: border-box;
       }
     }
   `,
 };
 
-const Sidebar = () => {
+type SidebarProps = {
+  open: boolean;
+};
+
+const Sidebar = ({ open }: SidebarProps) => {
   return (
-    <div css={styles.container}>
+    <div css={styles.container(open)}>
       <div>
         <div>
           <h2>Academic Years</h2>
@@ -84,6 +111,7 @@ const Sidebar = () => {
         </div>
 
         <Quicklinks />
+
         <User />
       </div>
     </div>

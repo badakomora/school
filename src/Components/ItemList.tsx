@@ -6,6 +6,10 @@ import { Classroom } from "./Classroom";
 
 const styles = {
   list: css`
+    @media (max-width: 768px) {
+      margin-top: 70px;
+    }
+
     a {
       text-decoration: none;
       color: #000;
@@ -123,8 +127,8 @@ const ItemList: React.FC<listTypes> = () => {
               {topics.length > 0
                 ? "Year 7 Topics"
                 : lessons.length > 0
-                ? "Topic 1"
-                : ""}
+                  ? "Topic 1"
+                  : ""}
             </h1>
             {topics.map((topic, index) => (
               <a href="." key={index} onClick={handleLessons}>
