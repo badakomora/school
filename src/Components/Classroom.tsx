@@ -20,7 +20,6 @@ const styles = {
           font-size: 2.6rem;
           font-weight: 700;
           line-height: 1.3;
-          font-family: math;
         }
 
         > p:first-of-type {
@@ -146,11 +145,9 @@ const styles = {
         padding: 0 12px;
 
         > div {
-          font-family: math;
 
           > h1 {
             font-size: 2rem;
-            font-family: math;
           }
 
           > p:nth-of-type(2) {
