@@ -145,7 +145,6 @@ const styles = {
         padding: 0 12px;
 
         > div {
-
           > h1 {
             font-size: 2rem;
           }
@@ -177,40 +176,69 @@ const styles = {
   `,
 };
 
+type Lesson = {
+  title: string;
+  descriptionTitle: string;
+  description: string;
+  video: string;
+  presentation: string;
+  activities: {
+    title: string;
+    description: string;
+    type: "worksheet" | "quiz";
+  }[];
+};
+
 export const Classroom = () => {
+  // Dummy Data
+  const lesson: Lesson = {
+    title: "WAsili ya Lugha ya Kiswahili.",
+    descriptionTitle: "Description",
+    description:
+      "Lugha ya Kiswahili ina historia ndefu inayohusisha mwingiliano wa tamaduni mbalimbali katika eneo la Pwani ya Afrika Mashariki. Hapa ni baadhi ya vipengele vya asili ya Kiswahili. Lugha hii imekua kupitia mawasiliano ya muda mrefu kati ya jamii za pwani na wageni kutoka maeneo mbalimbali ya dunia, na leo ni mojawapo ya lugha muhimu zaidi barani Afrika.",
+
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+
+    presentation:
+      "https://docs.google.com/document/d/1qvyNhtGQQLX6DNXyCxsLpv8z4tGBwPkq/edit",
+
+    activities: [
+      {
+        title: "📝 Lesson Worksheet",
+        description: "Practice today's lesson with guided exercises.",
+        type: "worksheet",
+      },
+      {
+        title: "✅ Lesson Quiz",
+        description: "Test your understanding and monitor your progress.",
+        type: "quiz",
+      },
+    ],
+  };
+
   return (
-    <section className="hero" css={styles.wrap}>
+    <div className="hero" css={styles.wrap}>
       <div>
         <div>
-          <h1>Asili ya Lugha ya Kiswahili.</h1>
+          <h1>{lesson.title}</h1>
 
-          <p>Description</p>
+          <p>{lesson.descriptionTitle}</p>
 
-          <p>
-            Lugha ya Kiswahili ina historia ndefu inayohusisha mwingiliano wa
-            tamaduni mbalimbali katika eneo la Pwani ya Afrika Mashariki. Hapa
-            ni baadhi ya vipengele vya asili ya Kiswahili. Lugha hii imekua
-            kupitia mawasiliano ya muda mrefu kati ya jamii za pwani na wageni
-            kutoka maeneo mbalimbali ya dunia, na leo ni mojawapo ya lugha
-            muhimu zaidi barani Afrika.
-          </p>
+          <p>{lesson.description}</p>
 
           <p>🎥 Watch the Lesson Video</p>
 
-          <video width="100%" height="360" controls>
-            <source
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            src={lesson.video}
+            title={lesson.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
 
           <p>📄 Presentation Material</p>
 
           <iframe
-            width="100%"
-            height="360"
-            src="https://docs.google.com/document/d/1qvyNhtGQQLX6DNXyCxsLpv8z4tGBwPkq/edit"
+            src={lesson.presentation}
             title="Lesson Presentation"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -219,26 +247,22 @@ export const Classroom = () => {
           <p>Learning Activities</p>
 
           <div className="actions">
-            <div className="cta">
-              <div>
-                <h3>📝 Lesson Worksheet</h3>
-                <p>Practice today's lesson with guided exercises.</p>
+            {lesson.activities.map((activity, index) => (
+              <div
+                key={index}
+                className={`cta ${activity.type === "quiz" ? "quiz" : ""}`}
+              >
+                <div>
+                  <h3>{activity.title}</h3>
+                  <p>{activity.description}</p>
+                </div>
+
+                <span className="arrow">→</span>
               </div>
-
-              <span className="arrow">→</span>
-            </div>
-
-            <div className="cta quiz">
-              <div>
-                <h3>✅ Lesson Quiz</h3>
-                <p>Test your understanding and monitor your progress.</p>
-              </div>
-
-              <span className="arrow">→</span>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
