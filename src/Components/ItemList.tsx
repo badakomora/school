@@ -6,6 +6,7 @@ import { Classroom } from "./Classroom";
 
 const styles = {
   list: css`
+    font-family: math !important;
     @media (max-width: 768px) {
       margin-top: 70px;
     }
@@ -66,30 +67,31 @@ const ItemList: React.FC<listTypes> = () => {
   useEffect(() => {
     const fetchedtopics = [
       {
-        title: "Historia ya Kiswahili.",
+        title: "KS3 English",
         desc: "5 lessons",
       },
       {
-        title: "Sarufi ya Kiswahili.",
+        title: "KS3 Literature",
         desc: "5 lessons",
       },
       {
-        title: "Fasihi ya Kiswahili.",
+        title: "KS4 English",
         desc: "5 lessons",
       },
       {
-        title: "Utamaduni wa Waswahili.",
+        title: "KS4 Literature",
         desc: "5 lessons",
       },
       {
-        title: "Mbinu za Mawasiliano.",
+        title: "KS5 English",
         desc: "5 lessons",
       },
       {
-        title: "Mbinu za Mawasiliano.",
+        title: "KS5 Literature",
         desc: "5 lessons",
       },
     ];
+
     setTopics(fetchedtopics);
   }, []);
 

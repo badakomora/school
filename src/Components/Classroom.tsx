@@ -5,7 +5,7 @@ const styles = {
   wrap: css`
     width: 100%;
     background: #fff;
-    font-family: math;
+    font-family: math !important;
 
     > div {
       max-width: 100%;
@@ -192,7 +192,7 @@ type Lesson = {
 export const Classroom = () => {
   // Dummy Data
   const lesson: Lesson = {
-    title: "WAsili ya Lugha ya Kiswahili.",
+    title: "Asili ya Lugha ya Kiswahili.",
     descriptionTitle: "Description",
     description:
       "Lugha ya Kiswahili ina historia ndefu inayohusisha mwingiliano wa tamaduni mbalimbali katika eneo la Pwani ya Afrika Mashariki. Hapa ni baadhi ya vipengele vya asili ya Kiswahili. Lugha hii imekua kupitia mawasiliano ya muda mrefu kati ya jamii za pwani na wageni kutoka maeneo mbalimbali ya dunia, na leo ni mojawapo ya lugha muhimu zaidi barani Afrika.",
