@@ -76,14 +76,20 @@ const styles = {
   `,
 };
 
+
 type SidebarProps = {
   open: boolean;
+  selectedYear: string;
+  setSelectedYear: React.Dispatch<React.SetStateAction<string>>;
 };
 
-// Dynamically generate Year 7 - Year 11
-const years = Array.from({ length: 5 }, (_, index) => `Year ${index + 7}`);
+const years = ["Year 3", "Year 4", "Year 5"];
 
-const Sidebar = ({ open }: SidebarProps) => {
+const Sidebar = ({
+  open,
+  selectedYear,
+  setSelectedYear,
+}: SidebarProps) => {
   return (
     <div css={styles.container(open)}>
       <div>
@@ -92,13 +98,20 @@ const Sidebar = ({ open }: SidebarProps) => {
 
           {years.map((year) => (
             <span key={year}>
-              <a href=".">{year}</a>
+              <a
+                href="."
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedYear(year);
+                }}
+              >
+                {year}
+              </a>
             </span>
           ))}
         </div>
 
         <Quicklinks />
-
         <User />
       </div>
     </div>

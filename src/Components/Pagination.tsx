@@ -1,41 +1,78 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import {
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
 const styles = {
   pagination: css`
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 
     span {
       display: flex;
       align-items: center;
+      gap: 5px;
       background: linear-gradient(50deg, #fff 0%, #1f56c6 20%);
-      padding: 5px;
+      padding: 8px 12px;
       border-radius: 5px;
       color: white;
-      margin: 5px;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
 
-      a {
-        color: #fff;
-        text-decoration: none;
+      &:hover:not(.disabled) {
+        opacity: 0.9;
+      }
+
+      &.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
     }
   `,
 };
 
-const Pagination = () => {
+type PaginationProps = {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage?: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const Pagination = ({
+  currentPage,
+  totalItems,
+  itemsPerPage = 10,
+  setCurrentPage,
+}: PaginationProps) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
   return (
     <div css={styles.pagination}>
-      <span>
+      <span
+        className={currentPage === 1 ? "disabled" : ""}
+        onClick={() =>
+          currentPage > 1 && setCurrentPage((page) => page - 1)
+        }
+      >
         <MdOutlineKeyboardDoubleArrowLeft />
-        <a href=".">Prev</a>
+        Prev
       </span>
 
       <span>
-        <a href=".">Next</a>
+        Page {currentPage} of {totalPages || 1}
+      </span>
+
+      <span
+        className={currentPage === totalPages ? "disabled" : ""}
+        onClick={() =>
+          currentPage < totalPages && setCurrentPage((page) => page + 1)
+        }
+      >
+        Next
         <MdOutlineKeyboardDoubleArrowRight />
       </span>
     </div>

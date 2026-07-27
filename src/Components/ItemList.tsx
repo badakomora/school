@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { listTypes } from "../types";
 import { Classroom } from "./Classroom";
 
 const styles = {
   list: css`
     font-family: math !important;
+
     @media (max-width: 768px) {
       margin-top: 70px;
     }
@@ -19,139 +20,113 @@ const styles = {
       padding: 10px;
       box-shadow: 0px 2px 10px lavender;
       margin-bottom: 10px;
-      background-color: #fff;
+      background: #fff;
       border-left: 4px solid #1061b7;
       position: relative;
-      cursor: pointer;
       border-radius: 4px;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: 0.3s;
+      cursor: pointer;
+
       &:after {
-        background: linear-gradient(90deg, #fff 0%, #1f56c6 30%);
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 0%;
         height: 100%;
-        transition: width 0.5s ease;
+        background: linear-gradient(90deg, #fff 0%, #1f56c6 30%);
+        transition: width 0.5s;
         z-index: 1;
       }
+
       &:hover {
-        color: #fff;
-        background-color: inherit;
+        color: white;
+
         &:after {
           width: 100%;
         }
       }
 
-      span:first-of-type {
-        font-weight: bold;
-        font-size: 17px;
+      span {
         z-index: 2;
+      }
+
+      span:first-of-type {
+        font-size: 17px;
+        font-weight: bold;
       }
 
       span:last-of-type {
         font-size: 13px;
-        z-index: 2;
       }
     }
   `,
 };
 
-const ItemList: React.FC<listTypes> = () => {
-  const [lessons, setLessons] = useState<listTypes[]>([]);
-  const [topics, setTopics] = useState<listTypes[]>([]);
+type Props = {
+  topics: listTypes[];
+  currentPage: number;
+  itemsPerPage: number;
+};
+
+const ItemList: React.FC<Props> = ({ topics, currentPage, itemsPerPage }) => {
   const [component, setComponent] = useState("");
-
-  useEffect(() => {
-    const fetchedtopics = [
-      {
-        title: "KS3 English",
-        desc: "5 lessons",
-      },
-      {
-        title: "KS3 Literature",
-        desc: "5 lessons",
-      },
-      {
-        title: "KS4 English",
-        desc: "5 lessons",
-      },
-      {
-        title: "KS4 Literature",
-        desc: "5 lessons",
-      },
-      {
-        title: "KS5 English",
-        desc: "5 lessons",
-      },
-      {
-        title: "KS5 Literature",
-        desc: "5 lessons",
-      },
-    ];
-
-    setTopics(fetchedtopics);
-  }, []);
+  const [lessons, setLessons] = useState<listTypes[]>([]);
 
   const fetchedLessons = [
     {
-      title: "Asili ya lugha ya Kiswahili.",
-      desc: "video, worksheet, Quiz, Slides",
+      title: "Lesson 1",
+      desc: "Video, Worksheet, Quiz",
     },
     {
-      title: "Maeneo yanayozungumza Kiswahili.",
-      desc: "video, worksheet",
+      title: "Lesson 2",
+      desc: "Video, Worksheet",
     },
   ];
+
+  const paginatedTopics = topics.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
+  const paginatedLessons = lessons.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   const handleLessons = (e: React.MouseEvent) => {
     e.preventDefault();
     setLessons(fetchedLessons);
-    setTopics([]);
   };
 
   const handleClass = (e: React.MouseEvent) => {
     e.preventDefault();
     setComponent("classroom");
-    setLessons([]);
-    setTopics([]);
   };
 
+  if (component === "classroom") {
+    return <Classroom />;
+  }
+
   return (
-    <>
-      <div css={styles.list}>
-        {component === "classroom" ? (
-          <Classroom />
-        ) : (
-          <>
-            <h1>
-              {topics.length > 0
-                ? "Year 7 Topics"
-                : lessons.length > 0
-                  ? "Topic 1"
-                  : ""}
-            </h1>
-            {topics.map((topic, index) => (
-              <a href="." key={index} onClick={handleLessons}>
-                <span>
-                  {index + 1}. {topic.title}
-                </span>
-                <span>{topic.desc}</span>
-              </a>
-            ))}
-            {lessons.map((lesson, index) => (
-              <a href="." key={index} onClick={handleClass}>
-                <span>
-                  {index + 1}. {lesson.title}
-                </span>
-                <span>{lesson.desc}</span>
-              </a>
-            ))}
-          </>
-        )}
-      </div>
-    </>
+    <div css={styles.list}>
+      <h1>{lessons.length ? "Lessons" : "Topics"}</h1>
+
+      {lessons.length === 0
+        ? paginatedTopics.map((topic, index) => (
+            <a href="." key={index} onClick={handleLessons}>
+              <span>{topic.title}</span>
+              <span>{topic.desc}</span>
+            </a>
+          ))
+        : paginatedLessons.map((lesson, index) => (
+            <a href="." key={index} onClick={handleClass}>
+              <span>{lesson.title}</span>
+              <span>{lesson.desc}</span>
+            </a>
+          ))}
+    </div>
   );
 };
 
