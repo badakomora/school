@@ -71,21 +71,21 @@ const styles = {
     }
 
     .item-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 5px;
-      background: #ffffff;
-      border-left: 4px solid #1061b7;
-      border-radius: 8px;
       text-decoration: none;
-      color: #1a1a1a;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      color: rgb(0, 0, 0);
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 5px;
+      box-shadow: lavender 0px 2px 10px;
+      margin-bottom: 10px;
+      background: rgb(255, 255, 255);
+      border-left: 4px solid rgb(16, 97, 183);
       position: relative;
-      overflow: visible;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: 0.3s;
+      cursor: pointer;
 
       &::after {
         content: "";
@@ -97,7 +97,6 @@ const styles = {
         background: linear-gradient(90deg, #1f56c6 0%, #fff 100%);
         transition: width 0.5s;
         z-index: 1;
-        border-radius: 4px;
       }
 
       &:hover {
