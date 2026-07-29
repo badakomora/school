@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { GoBack } from "./GoBack";
 
 const styles = {
   wrap: css`
@@ -189,7 +190,11 @@ type Lesson = {
   }[];
 };
 
-export const Classroom = () => {
+type Props = {
+  onGoBack: () => void;
+};
+
+export const Classroom: React.FC<Props> = ({ onGoBack }) => {
   // Dummy Data
   const lesson: Lesson = {
     title: "Asili ya Lugha ya Kiswahili.",
@@ -220,7 +225,10 @@ export const Classroom = () => {
     <div className="hero" css={styles.wrap}>
       <div>
         <div>
-          <h1>{lesson.title}</h1>
+          <span style={{ display: "flex", justifyContent: "space-between" }}>
+            <h1>{lesson.title}</h1>
+            <GoBack onGoBack={onGoBack} />
+          </span>
 
           <p>{lesson.descriptionTitle}</p>
 

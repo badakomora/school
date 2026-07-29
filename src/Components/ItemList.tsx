@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import React, { useState } from "react";
 import { listTypes } from "../types";
 import { Classroom } from "./Classroom";
+import { GoBack } from "./GoBack";
 
 const styles = {
   list: css`
@@ -10,6 +11,13 @@ const styles = {
 
     @media (max-width: 768px) {
       margin-top: 70px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     a {
@@ -100,18 +108,31 @@ const ItemList: React.FC<Props> = ({ topics, currentPage, itemsPerPage }) => {
     setLessons(fetchedLessons);
   };
 
+  const handleGoBack = () => {
+    if (component === "classroom") {
+      setComponent("");
+      return;
+    }
+
+    setLessons([]);
+  };
+
   const handleClass = (e: React.MouseEvent) => {
     e.preventDefault();
     setComponent("classroom");
   };
 
   if (component === "classroom") {
-    return <Classroom />;
+    return <Classroom onGoBack={handleGoBack} />;
   }
 
   return (
     <div css={styles.list}>
-      <h1>{lessons.length ? "Lessons" : "Topics"}</h1>
+      <div className="header">
+        <h1>{lessons.length ? "Lessons" : "Topics"}</h1>
+
+        {lessons.length > 0 && <GoBack onGoBack={handleGoBack} />}
+      </div>
 
       {lessons.length === 0
         ? paginatedTopics.map((topic, index) => (
