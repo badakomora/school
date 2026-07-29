@@ -15,7 +15,7 @@ const styles = {
       display: flex;
       align-items: center;
       gap: 5px;
-      background: linear-gradient(50deg, #fff 0%, #1f56c6 20%);
+      background: linear-gradient(135deg, #1f56c6, #3b82f6);
       padding: 8px 12px;
       border-radius: 5px;
       color: white;
@@ -54,9 +54,7 @@ const Pagination = ({
     <div css={styles.pagination}>
       <span
         className={currentPage === 1 ? "disabled" : ""}
-        onClick={() =>
-          currentPage > 1 && setCurrentPage((page) => page - 1)
-        }
+        onClick={() => currentPage > 1 && setCurrentPage((page) => page - 1)}
       >
         <MdOutlineKeyboardDoubleArrowLeft />
         Prev
